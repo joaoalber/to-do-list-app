@@ -1,0 +1,62 @@
+<%= form_with(model: @task, local: false, class: "fixed inset-0 z-50 overflow-auto flex items-center justify-center", id: 'modal-form') do |form| %>
+  <div class="fixed inset-0 overflow-hidden flex justify-center items-center z-50">
+    <div class="fixed inset-0 bg-gray-400 opacity-50"></div>
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md sm:max-w-sm md:max-w-md lg:max-w-lg relative z-10 mx-4 sm:mx-2">
+      <div class="text-black py-4 px-6 rounded-t-lg">
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg font-semibold"><%= "New task" %></h3>
+          <hr>
+          <button type="button" class="text-gray-400 hover:text-gray-800" aria-label="Close" onclick="toggleElement('modal-form')">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <hr class="w-5/6 m-auto">
+      <div class="p-6">
+        <div class="mb-4">
+          <%= form.label :title, "Title", class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.text_field :title, class: "form-input rounded-md block w-full mt-1", placeholder: "Wash the dishes 🍽️🧼" %>
+          <div class="text-red-500">
+            <% if @task.errors.include?(:title) %>
+              <% @task.errors.full_messages_for(:title).each do |error_message| %>
+                <%= error_message %>.
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="mb-4 space-y-2">
+          <%= form.label :due_date, "Description", class: "block text-gray-700 text-sm font-bold" %>
+          <%= form.text_area :description, class: "form-textarea rounded-md block w-full mt-1 min-h-24 resize-y", placeholder: "Wash the dishes. PS: remember to get a new soap" %>
+          
+          <% if @task.errors.include?(:description) %>
+            <div class="text-red-500 text-sm">
+              <% @task.errors.full_messages_for(:description).each do |error_message| %>
+                <p><%= error_message %>.</p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mb-4 space-y-2">
+          <%= form.label :due_date, "Due date", class: "block text-gray-700 text-sm font-bold" %>
+          <%= form.date_field :due_date, class: "form-input rounded-md block w-full mt-1", placeholder: "Wash the dishes. PS: remember to get a new soap" %>
+          
+          <% if @task.errors.include?(:due_date) %>
+            <div class="text-red-500 text-sm">
+              <% @task.errors[:due_date].each do |error_message| %>
+                <p><%= error_message %></p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="text-right">
+          <%= form.submit "Save", class: "btn bg-indigo-500 hover:bg-indigo-400 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
