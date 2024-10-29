@@ -24,12 +24,13 @@ export default class extends Controller {
         this.completedIconTarget.classList.toggle('hidden')
 
         if (data.completed_at != null) {
-          this.statusTarget.innerText = 'Completed'
           confetti({
             particleCount: 100,
             spread: 70,
             origin: { y: 0.6 }
           })
+
+          this.statusTarget.innerText = 'Completed'
         } else {
           this.statusTarget.innerText = 'Pending'
         }
