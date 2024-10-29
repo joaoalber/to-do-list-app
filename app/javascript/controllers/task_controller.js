@@ -8,8 +8,8 @@ export default class extends Controller {
     
     const taskId = this.element.dataset.taskId
     
-    fetch(`/tasks/${taskId}`, {
-      method: 'PATCH',
+    fetch(`/tasks/${taskId}/toggle_completed_at`, {
+      method: 'POST',
       headers: {
         'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
         'Accept': 'application/json',
@@ -30,9 +30,13 @@ export default class extends Controller {
             origin: { y: 0.6 }
           })
 
-          this.statusTarget.innerText = 'Completed'
+          this.statusTarget.innerHTML = `
+            <span class="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">Completed</span>
+          `;
         } else {
-          this.statusTarget.innerText = 'Pending'
+          this.statusTarget.innerHTML = `
+            <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">Pending</span>
+          `;
         }
       }
     })
