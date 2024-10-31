@@ -16,41 +16,45 @@
       <hr class="w-5/6 m-auto">
       <div class="p-6">
         <div class="mb-4">
-          <%= form.label :title, "Title", class: "block text-gray-700 text-sm font-bold mb-2" %>
-          <%= form.text_field :title, class: "form-input rounded-md block w-full mt-1", placeholder: "Wash the dishes 🍽️🧼" %>
-          <div class="text-red-500">
-            <% if @task.errors.include?(:title) %>
-              <% @task.errors.full_messages_for(:title).each do |error_message| %>
-                <%= error_message %>.
-              <% end %>
-            <% end %>
+          <div class="task-modal-header">
+            <div class="gradient-banner-header">
+              <div class="gradient-banner-settings" 
+                style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)">
+              </div>
+            </div>
+          
+            <svg xmlns="http://www.w3.org/2000/svg" fill="yellow" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+            </svg>
+          
+            <p class="banner-text">
+              Powered by AI: Just enter the task description — we take care of the title for you!
+            </p>
           </div>
         </div>
 
         <div class="mb-4 space-y-2">
-          <%= form.label :due_date, "Description", class: "block text-gray-700 text-sm font-bold" %>
+          <%= form.label :title, "Title", class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.text_field :title, class: "form-input rounded-md block w-full mt-1", placeholder: "Wash the dishes 🍽️🧼" %>
+        </div>
+
+        <div class="mb-4 space-y-2">
+          <%= form.label :description, "Description", class: "block text-gray-700 text-sm font-bold" %>
           <%= form.text_area :description, class: "form-textarea rounded-md block w-full mt-1 min-h-24 resize-y", placeholder: "Wash the dishes. PS: remember to get a new soap" %>
-          
-          <% if @task.errors.include?(:description) %>
-            <div class="text-red-500 text-sm">
-              <% @task.errors.full_messages_for(:description).each do |error_message| %>
-                <p><%= error_message %>.</p>
-              <% end %>
-            </div>
+        </div>
+
+        
+        <div class="text-red-500 mb-4">
+          <% if @task.errors.include?(:info_cannot_be_blank) %>
+            <% @task.errors[:info_cannot_be_blank].each do |error_message| %>
+              <%= error_message %>
+            <% end %>
           <% end %>
         </div>
 
         <div class="mb-4 space-y-2">
           <%= form.label :due_date, "Due date", class: "block text-gray-700 text-sm font-bold" %>
           <%= form.date_field :due_date, class: "form-input rounded-md block w-full mt-1", placeholder: "Wash the dishes. PS: remember to get a new soap" %>
-          
-          <% if @task.errors.include?(:due_date) %>
-            <div class="text-red-500 text-sm">
-              <% @task.errors[:due_date].each do |error_message| %>
-                <p><%= error_message %></p>
-              <% end %>
-            </div>
-          <% end %>
         </div>
 
         <div class="text-right">

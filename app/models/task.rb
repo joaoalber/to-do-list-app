@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
-  STATUSES = %w[completed pending archived]
+  validate :info_cannot_be_blank
+  before_save :set_title
 
   scope :by_statuses, ->(statuses) do
     conditions = []
@@ -11,22 +12,34 @@ class Task < ApplicationRecord
     where(conditions.join(" OR "))
   end
 
-  def completed?
-    completed_at.present?
-  end
+  STATUSES = %w[completed pending archived]
 
-  def archived?
-    archived_at.present?
-  end
-
-  def pending?
-    !archived? && !completed?
-  end
+  def completed? = completed_at.present?
+  def archived? = archived_at.present?
+  def pending? = !archived? && !completed?
 
   def status
     return :archived if archived_at?
     return :completed if completed_at?
 
     :pending
+  end
+
+  private
+
+  def set_title
+    return if title.present?
+    return if description.blank?
+
+    self.title = OpenAi::Client.new.call(description:).content
+
+    # fallback in case API is not working
+    self.title ||= description.split(" ").first(4).join(" ") + "..."
+  end
+
+  def info_cannot_be_blank
+    if title.blank? && description.blank?
+      errors.add(:info_cannot_be_blank, "Please provide at least a title or description")
+    end
   end
 end
