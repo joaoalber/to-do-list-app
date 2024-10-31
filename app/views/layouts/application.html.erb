@@ -19,8 +19,16 @@
   </head>
 
   <body>
-    <main class="container mx-auto p-8 mt-8 bg-white rounded">
-      <%= yield %>
-    </main>
+    <div class="page-wrapper">
+      <main class="container mx-auto p-8 mt-8 bg-white rounded">
+        <%= yield %>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-container">
+          <p class="footer-text">Made by <a class="underline" href="https://github.com/joaoalber" target="_blank">@joaoalber</a></p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

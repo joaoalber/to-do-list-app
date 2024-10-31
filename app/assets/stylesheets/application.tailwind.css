@@ -2,12 +2,165 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  /* Main container */
+  .task-container {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Header section */
+  .task-header-section {
+    @apply sm:flex sm:items-center;
+  }
+
+  .task-header-content {
+    @apply sm:flex-auto;
+  }
+
+  .task-main-title {
+    @apply text-xl font-semibold leading-6 text-gray-900;
+  }
+
+  .wave-emoji {
+    @apply text-2xl;
+  }
+
+  .task-notice {
+    @apply mt-6;
+  }
+
+  .task-notice-text {
+    @apply mt-2 text-sm text-gray-700 items-center;
+  }
+
+  .task-archive-link {
+    @apply font-medium text-yellow-500 hover:text-yellow-700 underline underline-offset-2 p-0 bg-transparent border-none inline;
+  }
+
+  /* Add button section */
+  .task-add-button-wrapper {
+    @apply mt-4 sm:ml-16 sm:mt-0 sm:flex-none;
+  }
+
+  .task-add-button {
+    @apply inline-flex items-center rounded-full bg-yellow-400 p-1 text-white shadow-sm hover:bg-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400;
+  }
+
+  /* Table section */
+  .task-table-wrapper {
+    @apply mt-8 flow-root;
+  }
+
+  .task-table-scroll {
+    @apply -mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8;
+  }
+
+  .task-table-container {
+    @apply inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8;
+  }
+
+  .task-table {
+    @apply min-w-full;
+  }
+
+  .task-table-box {
+    @apply overflow-hidden shadow-sm border-b border-gray-200;
+  }
+
+  /* Table headers */
+  .task-column-header {
+    @apply py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 w-full;
+  }
+
+  .task-date-header {
+    @apply px-8 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap;
+  }
+
+  .task-status-header {
+    @apply relative px-8 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap flex items-center;
+  }
+
+  .task-filter-button {
+    @apply ml-1 inline-flex items-center justify-center;
+  }
+
+  /* Filter dropdown */
+  .task-filter-dropdown {
+    @apply absolute mt-2 bg-white shadow-lg rounded-md p-4 z-50;
+  }
+
+  .task-filter-checkbox {
+    @apply h-4 w-4 text-indigo-600 border-gray-300 rounded cursor-pointer;
+  }
+
+  .task-filter-label {
+    @apply ml-3 block text-sm font-medium text-gray-700 cursor-pointer;
+  }
+
+  .task-filter-apply {
+    @apply inline-flex items-center justify-center cursor-pointer rounded-md p-1 text-gray-700 text-sm hover:bg-gray-100 transition-colors duration-150;
+  }
+
+  /* Table row */
+  .task-row {
+    @apply border-b border-gray-200;
+  }
+
+  .task-cell {
+    @apply whitespace-nowrap py-4 ml-4 pl-4 pr-3 text-sm font-medium sm:pl-6 flex items-center;
+  }
+
+  .task-toggle-button {
+    @apply mr-2;
+  }
+
+  .task-title-link {
+    @apply ml-1 text-gray-800 hover:underline underline-offset-2;
+  }
+
+  .task-date-cell {
+    @apply whitespace-nowrap px-8 py-4 text-sm text-gray-500 text-center;
+  }
+
+  .task-status-cell {
+    @apply whitespace-nowrap px-8 py-4 text-sm text-gray-500;
+  }
+
+  /* Status badges */
+  .status-badge {
+    @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-medium;
+  }
+
+  .status-badge-archived {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
+  .status-badge-completed {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .status-badge-pending {
+    @apply bg-blue-100 text-blue-700;
+  }
+
+  /* Delete button */
+  .task-delete-button {
+    @apply text-red-400 hover:text-red-700;
+  }
+
+  .page-wrapper {
+    @apply flex min-h-screen flex-col;
+  }
+
+  .footer {
+    @apply bg-white mt-auto;
+  }
+
+  .footer-container {
+    @apply mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8;
+  }
+
+  .footer-text {
+    @apply text-center text-sm/6 text-gray-600;
   }
 }
-
-*/
