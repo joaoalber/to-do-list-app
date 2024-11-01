@@ -72,6 +72,8 @@ bundle exec rails s
 ### Bugs
 
 - Confetti not working as expected when an action interrupts the JS execution (such as a request happening while confetti not ended its animation)
+- Sometines double-clicks when action is not completed yet is sending multiple requests
+- When you perform an action, the existing/selected filters are gone
 
 ### Future Improvements
 
