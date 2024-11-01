@@ -28,6 +28,6 @@ production:
   database: to_do_list_pg
   pool: 5
   timeout: 5000
-  username: <%= ENV.fetch("DB_USERNAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
-  url: <%= ENV.fetch("DATABASE_URL") %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>

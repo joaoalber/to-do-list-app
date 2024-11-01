@@ -76,6 +76,7 @@ bundle exec rails s
 ### Future Improvements
 
 - Add Google Calendar integration for due date reminders
+- Add "are you sure?" + alerts/notices
 - Add cron job for archiving completed tasks after 7 days
 - Make assets/code reusable using components
 - Improve design (try to make more modern)
