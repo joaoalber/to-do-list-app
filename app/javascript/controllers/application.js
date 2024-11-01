@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus"
-import TaskController from "./task_controller"
+import TaskController from "controllers/task_controller"
 
 const application = Application.start()
 application.register("task", TaskController)

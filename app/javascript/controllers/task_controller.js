@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["pendingIcon", "completedIcon", "status"]
-
   toggle(event) {
     event.preventDefault()
     
@@ -22,14 +21,12 @@ export default class extends Controller {
       if (data.success) {
         this.pendingIconTarget.classList.toggle('hidden')
         this.completedIconTarget.classList.toggle('hidden')
-
         if (data.completed_at != null) {
           confetti({
             particleCount: 100,
             spread: 70,
             origin: { y: 0.6 }
           })
-
           this.statusTarget.innerHTML = `
             <span class="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">Completed</span>
           `;
