@@ -2,6 +2,8 @@ class Task < ApplicationRecord
   validate :info_cannot_be_blank
   before_save :set_title
 
+  belongs_to :user
+
   scope :by_statuses, ->(statuses) do
     conditions = []
 

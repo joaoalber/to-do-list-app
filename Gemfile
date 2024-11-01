@@ -62,3 +62,5 @@ end
 # due depcreation in ruby 3.5.0
 gem "ostruct"
 gem "tailwindcss-rails", "~> 3.0"
+
+gem "devise", "~> 4.9"

@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "Tasks", type: :request do
+  let!(:user) { User.create!(email: "test@user.com", password: "specpass") }
+
+  before do
+    sign_in user
+  end
+
   describe "GET /tasks" do
     it "returns a success response" do
       get tasks_path
@@ -8,8 +14,8 @@ RSpec.describe "Tasks", type: :request do
     end
 
     context "with status filters" do
-      let!(:completed_task) { Task.create!(title: "Completed Task", description: "Task completed", due_date: Date.tomorrow, completed_at: Time.now) }
-      let!(:pending_task) { Task.create!(title: "Pending Task", description: "Task pending", due_date: Date.tomorrow, completed_at: nil) }
+      let!(:completed_task) { Task.create!(user:, title: "Completed Task", description: "Task completed", due_date: Date.tomorrow, completed_at: Time.now) }
+      let!(:pending_task) { Task.create!(user:, title: "Pending Task", description: "Task pending", due_date: Date.tomorrow, completed_at: nil) }
 
       it "filters tasks by status" do
         get tasks_path, params: { status: [ "completed" ] }
@@ -27,7 +33,7 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "GET /tasks/:id/edit" do
-    let!(:task) { Task.create!(title: "Test Task", description: "Edit test", due_date: Date.tomorrow) }
+    let!(:task) { Task.create!(user:, title: "Test Task", description: "Edit test", due_date: Date.tomorrow) }
 
     it "returns a success response" do
       get edit_task_path(task)
@@ -53,7 +59,7 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "PATCH /tasks/:id" do
-    let!(:task) { Task.create!(title: "Test Task", description: "Update test", due_date: Date.tomorrow) }
+    let!(:task) { Task.create!(user:, title: "Test Task", description: "Update test", due_date: Date.tomorrow) }
 
     context "when task attributes are changed" do
       it "updates the task and redirects" do
@@ -73,7 +79,7 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "POST /tasks/:id/toggle_completed_at" do
-    let!(:task) { Task.create!(title: "Toggle Completion", description: "Toggles completion status", completed_at: Date.today) }
+    let!(:task) { Task.create!(user:, title: "Toggle Completion", description: "Toggles completion status", completed_at: Date.today) }
 
     it "toggles the completed status of the task" do
       post toggle_completed_at_task_path(task), params: { id: task.id }
@@ -94,7 +100,7 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "DELETE /tasks/:id" do
-    let!(:task) { Task.create!(title: "Test Task", description: "Delete test", due_date: Date.tomorrow) }
+    let!(:task) { Task.create!(user:, title: "Test Task", description: "Delete test", due_date: Date.tomorrow) }
 
     it "deletes the task and redirects to tasks list" do
       expect {
@@ -105,8 +111,8 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "POST /tasks/archive_tasks" do
-    let!(:completed_task) { Task.create!(title: "Completed Task", description: "Archive test", due_date: Date.yesterday, completed_at: Time.now) }
-    let!(:pending_task) { Task.create!(title: "Pending Task", description: "Pending archive test", due_date: Date.tomorrow, completed_at: nil) }
+    let!(:completed_task) { Task.create!(user:, title: "Completed Task", description: "Archive test", due_date: Date.yesterday, completed_at: Time.now) }
+    let!(:pending_task) { Task.create!(user:, title: "Pending Task", description: "Pending archive test", due_date: Date.tomorrow, completed_at: nil) }
 
     it "archives only completed tasks and redirects" do
       post archive_tasks_tasks_path

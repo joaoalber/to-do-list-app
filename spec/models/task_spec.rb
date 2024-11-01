@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
+  let!(:user) { User.create!(email: "test@user.com", password: "specpass") }
+
   describe 'validations' do
-    let(:task) { Task.new }
+    let(:task) { Task.new(user:) }
 
     context 'when both title and description are blank' do
       it 'is not valid' do
@@ -37,7 +39,7 @@ RSpec.describe Task, type: :model do
   end
 
   describe '#set_title' do
-    let(:task) { Task.new(description: 'Need to go out with my dog today') }
+    let(:task) { Task.new(user:, description: 'Need to go out with my dog today') }
 
     context 'when title is blank and description is present' do
       before do
@@ -85,14 +87,14 @@ RSpec.describe Task, type: :model do
   describe '#completed?' do
     context 'when completed_at is present' do
       it 'returns true' do
-        task = Task.new(completed_at: Time.now)
+        task = Task.new(user:, completed_at: Time.now)
         expect(task.completed?).to be true
       end
     end
 
     context 'when completed_at is nil' do
       it 'returns false' do
-        task = Task.new(completed_at: nil)
+        task = Task.new(user:, completed_at: nil)
         expect(task.completed?).to be false
       end
     end
@@ -101,14 +103,14 @@ RSpec.describe Task, type: :model do
   describe '#archived?' do
     context 'when archived_at is present' do
       it 'returns true' do
-        task = Task.new(archived_at: Time.now)
+        task = Task.new(user:, archived_at: Time.now)
         expect(task.archived?).to be true
       end
     end
 
     context 'when archived_at is nil' do
       it 'returns false' do
-        task = Task.new(archived_at: nil)
+        task = Task.new(user:, archived_at: nil)
         expect(task.archived?).to be false
       end
     end
@@ -117,21 +119,21 @@ RSpec.describe Task, type: :model do
   describe '#pending?' do
     context 'when neither completed_at nor archived_at is present' do
       it 'returns true' do
-        task = Task.new(completed_at: nil, archived_at: nil)
+        task = Task.new(user:, completed_at: nil, archived_at: nil)
         expect(task.pending?).to be true
       end
     end
 
     context 'when completed_at is present' do
       it 'returns false' do
-        task = Task.new(completed_at: Time.now)
+        task = Task.new(user:, completed_at: Time.now)
         expect(task.pending?).to be false
       end
     end
 
     context 'when archived_at is present' do
       it 'returns false' do
-        task = Task.new(archived_at: Time.now)
+        task = Task.new(user:, archived_at: Time.now)
         expect(task.pending?).to be false
       end
     end
@@ -140,30 +142,30 @@ RSpec.describe Task, type: :model do
   describe '#status' do
     context 'when archived_at is present' do
       it 'returns :archived' do
-        task = Task.new(archived_at: Time.now)
+        task = Task.new(user:, archived_at: Time.now)
         expect(task.status).to eq(:archived)
       end
     end
 
     context 'when completed_at is present' do
       it 'returns :completed' do
-        task = Task.new(completed_at: Time.now)
+        task = Task.new(user:, completed_at: Time.now)
         expect(task.status).to eq(:completed)
       end
     end
 
     context 'when neither completed_at nor archived_at is present' do
       it 'returns :pending' do
-        task = Task.new(completed_at: nil, archived_at: nil)
+        task = Task.new(user:, completed_at: nil, archived_at: nil)
         expect(task.status).to eq(:pending)
       end
     end
   end
 
   describe '.by_statuses' do
-    let!(:completed_task) { Task.create!(title: "Completed Task", completed_at: Time.now) }
-    let!(:pending_task) { Task.create!(title: "Pending Task") }
-    let!(:archived_task) { Task.create!(title: "Archived Task", archived_at: Time.now) }
+    let!(:completed_task) { Task.create!(user:, title: "Completed Task", completed_at: Time.now) }
+    let!(:pending_task) { Task.create!(user:, title: "Pending Task") }
+    let!(:archived_task) { Task.create!(user:, title: "Archived Task", archived_at: Time.now) }
 
     context 'when filtering by completed status' do
       it 'returns only completed tasks' do
