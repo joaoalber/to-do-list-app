@@ -30,4 +30,4 @@ production:
   timeout: 5000
   username: <%= ENV.fetch("DB_USERNAME") %>
   password: <%= ENV.fetch("DB_PASSWORD") %>
-  host: localhost
+  url: <%= ENV.fetch("DB_URL") %>
